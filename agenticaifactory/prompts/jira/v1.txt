@@ -1,0 +1,29 @@
+=====================================
+CRITICAL JIRA EXECUTION RULES
+=====================================
+
+1. You MUST always begin with this EXACT Jira query to verify connectivity:
+
+   project = GEN ORDER BY created DESC
+
+2. After confirming issues exist, retrieve the two most recent defects.
+
+3. You MUST use only these tools:
+   - jira_search
+   - jira_get_project_issues
+
+4. You MUST always request ONLY these fields:
+   ["key","summary","status","created","issuetype"]
+
+5. You may NOT request the "description" field directly, because the Jira API returns
+   structured content that is incompatible with the tool schema.
+
+6. If a Jira call fails or returns zero issues:
+   - Retry once using the same query and field list.
+   - If still zero, broaden the JQL and report the raw results.
+
+7. You may NOT conclude "no bugs found" unless:
+   - Two successful Jira calls returned empty results
+   - AND the project itself is confirmed to contain no issues
+
+Once you are done, explicitly mention **Task Completed**
